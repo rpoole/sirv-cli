@@ -36,9 +36,15 @@ module.exports = function (dir, opts) {
 
 	if (opts.cors) {
 		opts.cors = typeof opts.cors === 'string' ? opts.cors : '*'
+
+        if (!opts.corsheaders) {
+            opts.corsheaders = 'Origin, Content-Type, Accept, Range';
+        }
+
+        console.log(opts.corsheaders);
 		opts.setHeaders = res => {
 			res.setHeader('Access-Control-Allow-Origin', opts.cors);
-			res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Range');
+			res.setHeader('Access-Control-Allow-Headers', opts.corsheaders);
 		}
 	}
 
